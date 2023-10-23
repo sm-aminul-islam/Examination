@@ -17,13 +17,45 @@ class Homepage extends ConsumerWidget {
         ),
       ),
       body: Center(
-        child: Text("Provider say $value"),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          ref.read(countProvider.state).state++;
-        },
-        child: const Icon(Icons.add),
+        child: Column(
+          children: [
+            Text(
+              "$value",
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+            ),
+            const SizedBox(
+              height: 40,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FloatingActionButton(
+                  onPressed: () {
+                    ref.read(countProvider.notifier).increment();
+                  },
+                  child: const Icon(Icons.add),
+                ),
+                const SizedBox(width: 40),
+                FloatingActionButton(
+                  onPressed: () {
+                    ref.read(countProvider.notifier).decrement();
+                  },
+                  child: const Icon(Icons.remove_circle_rounded),
+                ),
+                const SizedBox(width: 40),
+                FloatingActionButton(
+                  onPressed: () {
+                    ref.read(countProvider.notifier).reset();
+                  },
+                  child: const Text(
+                    "Reset",
+                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
